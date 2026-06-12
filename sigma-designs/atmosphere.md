@@ -11,8 +11,8 @@ language. This ramp leans WARM (amber/coral/rose carry it).
 amber    burnt    salmon   coral    rose     violet   peri     azure    light-peri
 ```
 
-Named roles: him `#67a7ff` (azure) · her `#ff646a` (coral) · romantic-warmth
-bias target `#ff7a8c` (rim/aurora pull toward this as a story warms).
+Accent pair: azure `#67a7ff` · coral `#ff646a` (dual presence lights) ·
+warmth-bias target `#ff7a8c` (pull rims/aurora toward it as a narrative warms).
 
 ## Two background modes (pick per mood, both live)
 

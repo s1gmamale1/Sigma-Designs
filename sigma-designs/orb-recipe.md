@@ -54,7 +54,7 @@ nested rims read as "2 bubbles in 1" — verified author rejection).
 
 ## 4. Presence lights (optional story element)
 
-Soft colored glows inside (e.g. azure `#67a7ff` him / coral `#ff646a` her):
+Soft colored glows inside (e.g. azure `#67a7ff` / coral `#ff646a` as paired accents):
 gaussian-profile sprites, peak alpha ≈0.74, falloff like
 `pow(dot(n,v), k)` softened — they must read as LIGHT, not pale discs
 (hard-edged additive circles are a verified failure).
