@@ -52,3 +52,5 @@ This applies at every scale: hero orb, micro-bubbles, even the cursor.
 | Symmetric pulse envelopes | Sharp attack, soft decay (solar flare, not sine) |
 | Overlapping lights blow to white | Compress: `hot /= 1 + 0.85·max(sum−1, 0)`; cap white ≤0.55 |
 | Text/effects "stuck onto" the bubble | Parent INTO its transform + slight liquid lag; mask by silhouette |
+| In-bubble word glow is blocky/"low-poly pixels" | Bloom from the MIP chain (coarse trilinear taps), never a few coverage taps over a wide radius (they step into petals) — see atmosphere.md |
+| In-bubble word is frozen/muddy/ghosted | Color in-SHADER not the raster (white mask + rotating palette conic, sat-lifted); kill chroma split on that plate |

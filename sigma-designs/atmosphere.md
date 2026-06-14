@@ -62,6 +62,35 @@ Text that must feel INSIDE glass cannot be filtered DOM — render it in-scene:
    `display:none`) — scroll geometry, pins, and screen readers intact.
    Reduced-motion: skip the plates, show the DOM text.
 
+### A living word — rotating RGB fill + glowing edge (like the shell)
+
+To make a hero word carry the SAME living light as the orb — a rotating RGB
+gradient with glowing edges — the color must live in the SHADER, not the
+raster. A baked canvas gradient is frozen; it cannot rotate.
+
+1. **Rasterize the glyphs as a plain WHITE coverage mask** — no baked color.
+   Bump this plate's raster scale ~1.6× (the fisheye magnifies the center;
+   an under-res mask turns to jaggies). The shader recolors it live.
+2. **Rotating fill:** sample the shared 9-stop palette as a closed ring by the
+   texel's conic angle about the word center, `palette(atan2(uv−0.5)/2π +
+   t·spin)`. Calm spin ≈ 0.05–0.07 rev/s (full turn ~14–20s; never strobe).
+   **Saturation-lift the ramp** (`mix(luma, c, 1.35)`) — flat ramp values read
+   muddy; the word must look like EMITTED light (the shell does this to its
+   interior aurora).
+3. **Glowing edge = a MIP-chain bloom, never a hand-rolled ring of taps.** A
+   few coverage taps over a wide radius step into chunky colored petals (reads
+   as "low-poly / blurry pixels", NOT a glow). Instead blend a few coarse,
+   pre-filtered mip levels of the mask — hardware trilinear is smooth by
+   construction: `bloom = Σ texture(mask, uv, bias_k·{2,3.5,5})·{.42,.34,.24}`;
+   `halo = max(bloom − 0.5·core, 0)`. Generate the full mip chain explicitly
+   on the plate texture (NPOT is fine on WebGL2). Breathe the halo on a
+   rim-light cadence (~4.6s) and let the edge hue lead the fill slightly.
+4. **Kill the chromatic split on THIS plate.** The generic in-orb refraction
+   (step 3 above) samples the white mask at offsets → ghosted/doubled glyph
+   edges (more "pixelated" artifact). A recolored mask owns its own look; set
+   its chroma to 0. Likewise keep its glass rim-tint pickup LOW (~0.2) so the
+   rotating RGB stays vivid instead of being dulled toward the shell hue.
+
 ## Script accents
 
 A script face (e.g. Parisienne) for emotional spans only, inked with a
