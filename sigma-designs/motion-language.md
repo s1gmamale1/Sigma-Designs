@@ -52,9 +52,10 @@ One canvas, one scroll, one protagonist element that NEVER unmounts.
   fast gesture cannot snap them. Only the reader's journey through the story is
   scrubbed. Rails outside the render loop must use wall clock, not the
   renderer's clock — its origin is canvas mount, not page load.
-- Who writes the playhead, how input is quantized, and how to switch rails
-  without a seam: see navigation-rails.md. Do not free-scrub a story you want
-  read — see Law 3 there.
+- Who writes the playhead, how to stop a fling blowing through the story, and
+  how to switch rails without a seam: see navigation-rails.md. Anti-rush can
+  live at the input layer or the position layer — Law 3 there gives both, with
+  the failure mode each one produces on real hardware.
 
 ## Scroll pins (the trap that bit twice)
 

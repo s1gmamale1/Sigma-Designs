@@ -55,15 +55,17 @@ interior wash and audio blast); an un-flagged entrance one-shot replayed a
 each is either bridged or provably identical on both sides. A channel nobody
 listed is the one that steps.
 
-## Law 3 — quantize the INPUT, never the render layer
+## Law 3 — anti-rush belongs at the INPUT layer or the POSITION layer; know
+which you picked
 
-To stop a fast gesture blowing through the story, change what input MEANS, not
-what the renderer does. The renderer keeps receiving a normal timeline; it just
-hops and holds.
+A fling must not blow through the whole story. Two families solve it, and they
+fail in opposite ways. Both have shipped; pick deliberately.
 
-```
-wheel/touch delta → quantizer → (maybe) one eased scrollTo to the next anchor
-```
+### A. Quantize the INPUT
+
+Change what input MEANS. The renderer keeps receiving a normal timeline; it just
+hops and holds. `wheel/touch delta → quantizer → one eased scrollTo to the next
+anchor`.
 
 | constant | value | role |
 |---|---|---|
@@ -73,21 +75,61 @@ wheel/touch delta → quantizer → (maybe) one eased scrollTo to the next ancho
 | re-arm idle | 350 ms | after firing, input is DEAD until it goes idle this long |
 | dwell after landing | 2000 ms | the beat SETTLES; input does nothing |
 
-The re-arm gate is what defeats a continuous scroll: sustained input keeps the
-idle gap tiny, so it never re-arms — one gesture advances exactly one beat, then
-nothing until the reader deliberately pauses. Charge decays BEFORE accumulating,
-and a direction flip resets it.
+The re-arm gate defeats a continuous scroll: sustained input keeps the idle gap
+tiny, so it never re-arms. Charge decays BEFORE accumulating; a direction flip
+resets it. Pair it with FORWARD-ONLY on the wheel path — a trackpad's momentum
+tail flips the delta sign as inertia decays, and a quantizer that honors retreat
+reads those up-blips as a deliberate backward gesture and ping-pongs between
+beats. Keep retreat on the keyboard path, which carries no momentum.
 
-**Forward-only.** A trackpad's momentum tail flips the delta sign as inertia
-decays. A quantizer that honors retreat reads those up-blips as a deliberate
-backward gesture and ping-pongs between beats. Ignore retreat on the wheel/touch
-path (spend the charge, don't move); keep retreat on the keyboard path, where a
-keypress carries no momentum. One key press = exactly one beat, no charge.
+✓ Impossible to rush; pace is completely speed-independent.
+✗ **Verified failure on a real trackpad**: the gates EAT inputs, so scrolling
+appears to do nothing — then the hop fires all at once. Author verdict: *"the
+scroll not working, I have to go till the end of the page and then that insta
+transitioning."* A frame stall can also teleport the hop (Law 4). Every
+symptom is invisible to synthetic wheel events.
 
-**Clamp the output too.** Quantizing hops does not clamp scroll RANGE — a
-full-height document still lets raw scroll run past the last anchor into
-undesigned territory. Clamp the written playhead at the lock point for the
-duration of that phase; make it a pure passthrough afterward.
+### B. Free-scrub with STICKY CHECKPOINTS
+
+Leave scrubbing continuous and reversible; move anti-rush to the POSITION layer.
+Each text beat is a gate that clamps and freezes the scroll until the reader
+deliberately scrolls again.
+
+- **Gates** = the beat anchors, minus the opening one.
+- **The binding ceiling is the first UNRELEASED gate, wherever the scroll
+  currently is** — never "the first gate above the scroll". A fast lerp
+  overshoots hundreds of px in a single frame, leaving no gate above it, and a
+  mega-flick sails to the end of the document.
+- Crossing it clamps the scroll to the gate and STICKS: a real freeze swallows
+  the entire momentum tail.
+- **Release is judged per input event, with NO LATCH.** The releasing event must
+  itself follow ≥500ms of input silence, after the stick has settled ≥600ms. A
+  latch armed once at the first quiet gap lets a mid-gesture hiccup unlock the
+  gate, and the rest of the blast sails straight through.
+- The FINAL gate never releases forward — an explicit affordance is the only way
+  past. Backward always releases without marking the gate passed; passed gates
+  re-arm on a small rewind (~48px).
+
+✓ Keeps the reader's finger pace; anti-rush holds no matter how input arrives —
+wheel, touch, keys, or a fast lerp between frames.
+✗ Scroll speed couples to transition speed again (the accepted trade).
+
+### The freeze primitive (either family)
+
+**A `virtualScroll` callback returning `false` is NOT a freeze.** It skips the
+smooth-scroll library's own handling but never calls `preventDefault()`, so the
+browser scrolls the raw document underneath. Every "inert" gate built that way
+is a no-op against native scroll — one project's pre-ceremony wheels dragged the
+page to y≈1500 before the intro had run, corrupting state.
+
+Use the library's real `stop()` (a stopped instance does `preventDefault`) as
+the only freeze, reconcile liveness per frame, and gate KEYS separately — they
+never emit a wheel event, so they bypass the wheel path entirely.
+
+**Clamp the output too.** Neither family clamps scroll RANGE — a full-height
+document still lets raw scroll run past the last anchor into undesigned
+territory. Clamp the written playhead at the lock point for that phase, and make
+it a pure passthrough afterward.
 
 ## Law 4 — feed animation clocks a JANK-CLAMPED time
 

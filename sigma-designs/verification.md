@@ -70,6 +70,27 @@ behaviour returned 1 here", "is ~2.65× smaller than the previous half-width".
 A regression test that only asserts the fixed value teaches the next reader
 nothing about what went wrong.
 
+**Your unit tests will happily agree with your bug.** A pure rail and its tests
+are written from the same mental model, so a wrong ASSUMPTION passes green. Two
+real examples, both caught only on live hardware: a gate ceiling defined as
+"the first gate above the scroll" (a fast lerp overshoots hundreds of px in one
+frame, so nothing is above it and a flick sails to the end of the document),
+and a release latch armed at the first quiet gap (a mid-gesture hiccup unlocks
+it and the rest of the blast passes through). Both had passing tests. Pure-rail
+coverage proves your model is self-consistent — never that it matches reality.
+
+### Choosing an input instrument (they are not interchangeable)
+
+| instrument | proves | structurally BLIND to |
+|---|---|---|
+| synthetic `WheelEvent` via `dispatchEvent` | quantizer/state logic | anything about native scrolling — untrusted events never run default actions, so a missing `preventDefault` is invisible |
+| real CDP wheel (`Input.dispatchMouseEvent`) | native-scroll leakage, freeze primitives | cadence — a driver round-trip injects ≥500ms between events, which any idle-gap rule reads as deliberate pauses |
+| in-page burst at a fixed ~16ms interval | cadence-sensitive rules (idle gaps, re-arm, release windows) | native default-action behaviour, same as synthetic |
+
+Pick by what you are testing. A freeze bug needs real wheels; a "did the blast
+release the gate" bug needs a controlled burst. One project needed both
+instruments to verify two consecutive fixes to the same file.
+
 ## Gotcha table (each cost a real debugging session)
 
 | Gotcha | Rule |
@@ -91,6 +112,7 @@ nothing about what went wrong.
 | `background` shorthand on an element using layered `background-image` silently wipes the layers | set longhand properties only |
 | `page.screenshot()` mis-registers a fixed canvas during scroll (invents black bands) | verify motion with screencast/video frames, never scroll screenshots |
 | Trackpad momentum tails flip the delta sign; synthetic wheel events are monotonic | inertia bugs are LIVE-HARDWARE-ONLY — a headless suite cannot reproduce them, so budget a real-device pass |
+| A smooth-scroll hook returning `false` never `preventDefault`s, so the browser scrolls the document natively underneath | the library's real `stop()` is the only freeze; gate keyboard separately (keys emit no wheel event) |
 | A measuring harness's own reload/scripting produces states the app never reaches | reproduce a suspected bug WITHOUT the harness before believing it |
 | A material constructed with non-zero uniforms paints one frame before the first frame-loop write | seed uniforms at their true initial values; let frame 1 re-derive them |
 | No inline background on the HTML shell → browser-white first paint before CSS arrives | inline `html,body{background:#08070d}` in the document head |

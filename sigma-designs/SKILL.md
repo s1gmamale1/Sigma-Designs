@@ -65,4 +65,6 @@ This applies at every scale: hero orb, micro-bubbles, even the cursor.
 | A visible step at a mode/phase change | An un-bridged continuous channel — capture and ease EVERY one across the seam |
 | Motion measures smooth but arrives ahead of the camera | Double-ease — rails return raw linear, one consumer eases |
 | Elements pop in at full size when a camera returns | Give them the birth envelope with a wall-clock input, and latch it so it plays once |
-| A fast gesture blows through the whole story | Quantize the INPUT (charge + dwell + re-arm), never the render layer |
+| A fast gesture blows through the whole story | Anti-rush at the input layer (quantize) or the position layer (sticky checkpoints) — navigation-rails.md Law 3 has both and how each fails |
+| Scroll "does nothing, then jumps" | Input-quantizing gates are eating the deltas — the failure mode of that whole family; consider positional checkpoints instead |
+| A scroll "freeze" that doesn't freeze | Returning `false` from a virtualScroll hook never `preventDefault`s — the browser scrolls natively underneath. Use the library's real `stop()` |
