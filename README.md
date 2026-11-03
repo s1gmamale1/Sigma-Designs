@@ -41,8 +41,17 @@ git clone https://github.com/s1gmamale1/Sigma-Designs.git
 cd Sigma-Designs && ./install.sh   # symlinks every skill into ~/.claude/skills and ~/.agents/skills
 ```
 
-Re-runnable and never overwrites an existing skill of the same name; update
-later with `git pull`. Then ask for the look ("Sigma Designs style hero", "a
+Re-runnable; update later with `git pull`. Per skill and target it does this:
+
+- symlink already pointing at this repo: left as is (`ok (linked)`)
+- symlink pointing elsewhere or dangling: replaced (`relinked (was -> <old>)`)
+- an old copied `sigma-designs` folder (pre-family: `name: sigma-designs` plus `orb-recipe.md`): moved to `~/.claude/skills-backup/sigma-designs.pre-family-<timestamp>` (`~/.agents/skills-backup` for Codex), outside the skills dir because backups inside it still load as skills, then linked
+- any other real file or folder: left alone with `skip (not ours): <path>`
+
+Per-project install instead: copy `skills/<name>` (and `skills/sigma-designs`
+if you want the hub) into `<project>/.claude/skills/`.
+
+Then ask for the look ("Sigma Designs style hero", "a
 page that matches the Akademiya school site") and the right skill loads.
 
 ## Files

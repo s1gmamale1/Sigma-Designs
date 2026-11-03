@@ -54,7 +54,7 @@ Inner pages: velvet page header → paper rows (copy + capture) → steps → FA
 - Dark surfaces carry `data-nav-theme="dark"`; the nav switches to dark glass over them.
 - Reveal: `data-reveal="rise"` (block) or `"stagger"` (children); armed only below the fold after hydration; never nested.
 - Captures: `PanelShot` / `PhoneShot`; phones render as a lazy three.js model, falling back to the CSS phone.
-- One action, the demo: "Book a demo" / "Demoga yozilish" / "Записаться на демо" — repeated in the nav, the pilot band and the form, never joined by a second action ("Learn more", "See the product").
+- One action, the demo: "Book a demo" / "Demoga yozilish" / "Записаться на демо" — repeated in the nav, the pilot band and the form, never joined by a competing marketing CTA ("Learn more", "See the product", "Start free"). Allowed secondary links: Sign in (nav), contact channels (e.g. the Telegram link beside the form), and navigation (role/page links).
 - New blocks reveal with `data-reveal`; the `.ak-rise` scroll-timeline reveal exists only for reused old-landing components.
 
 ## A new product line or a new page
@@ -91,7 +91,7 @@ throwaway prototype only, and never for the product screens.
 | Mistake | Fix |
 |---|---|
 | Warm cream + serif + one indigo accent ("premium SaaS") | Red/ink/velvet/paper tokens, Poppins/Montserrat |
-| Opening with features or "AI-powered LMS" | Name + one product line, then the pains |
+| Opening with a feature list before the name and the pains | Name + one owner-approved product line, then the pains |
 | Pains as a grid of icon cards | One hook per beat, carousel on a timer, on velvet |
 | Stat counters, "[PILOT DATA]" placeholders, animated bar charts | No numbers without proof; show the real screen |
 | Screenshots in browser chrome or drawn with CSS | Real capture in a tilted panel or a 3D phone |

@@ -21,11 +21,13 @@ Write for them, in their words, and only about what is Built.
 
 | Slot | Line |
 |---|---|
-| Hero product line | Bring a powerful LMS with advanced AI to your school |
-| Hero red line | All your school operations under one hood. |
+| Hero product line | Bring a powerful LMS with advanced AI to your school (owner-approved, taken from the old site) |
+| Hero red line | All your school operations under one hood. (owner-approved) |
 | Pains title / sub | Sound familiar? / A normal week at most schools. |
 | Turn | Let's fix this. / Introducing Akademiya AI for Schools! |
 | Pilot | Try it in one grade first. / A free 6-week pilot. Our team imports your classes; the success measures and a decision date are agreed up front. / After that, $20 per student per month. |
+
+The two hero lines are the owner's choice: keep them verbatim and do not imitate them with further superlatives ("powerful", "advanced", "the best") anywhere else.
 
 The seven hooks, in story order (each answered further down the page):
 1. Ask how 7-B is doing. You'll get an opinion, not a number.

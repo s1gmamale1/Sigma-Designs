@@ -175,20 +175,23 @@ Radii: pill buttons 999px; familiar card 28px; capture image and panel plane 18p
 | FAQ summary, demo tab | `2px solid --mk-red-ink`, offset 4px / 2px |
 | Round red cue button | `3px solid --mk-ink`, offset 3px, plus `0 0 0 6px #fff` (motion.css) |
 
-## 10. Contrast (computed WCAG ratios)
+## 10. Contrast (computed WCAG 2.x relative-luminance ratios)
 
-| Pair | Ratio |
-|---|---|
-| white-ish `#f7f4fa` on velvet | 17.5 |
-| mist `#b3adbd` on velvet | 8.8 |
-| footer `#c9c1d3` on velvet | 11.0 |
-| `#ff5a6e` on velvet | 6.3 |
-| ink on paper | 17.1 |
-| ink-2 on paper | 7.7 |
-| red-ink `#d0021a` on paper | 5.5 |
-| white on `#d0021a` | 5.7 |
-| white on `#ec031d` | 4.6 (large/bold text only) |
-| `#ec031d` as text on paper | 4.5 (borderline; use red-ink for body-size red text) |
+AA needs 4.5:1 for normal text, 3:1 for large text (24px, or 18.66px bold).
 
-- Rule: red TEXT on light = `--mk-red-ink`; red FILL = `--mk-red`; red text on velvet = `#ff5a6e`.
+| Pair | Ratio | AA normal text |
+|---|---|---|
+| white-ish `#f7f4fa` on velvet | 17.53 | pass |
+| mist `#b3adbd` on velvet | 8.76 | pass |
+| footer `#c9c1d3` on velvet | 10.96 | pass |
+| `#ff5a6e` on velvet | 6.31 | pass |
+| ink on paper | 17.14 | pass |
+| ink-2 on paper | 7.74 | pass |
+| red-ink `#d0021a` on paper | 5.52 | pass |
+| white on `#d0021a` | 5.67 | pass |
+| white on `#ec031d` | 4.57 | pass (barely) |
+| `#ec031d` as text on paper | 4.45 | FAIL (large text only) |
+
+- Rule: red TEXT on light = `--mk-red-ink` (`#d0021a`); red FILL = `--mk-red`; red text on velvet = `#ff5a6e`. Small red text on light never uses `#ec031d`: it is for fills, large text and the nav's active-language pill.
+- Known sub-4.5 spot: the nav's active-language pill (red tint) is carried unchanged from the old site; do not copy the pattern elsewhere.
 - Reduced motion: every reveal, sky drift, cloud bank, tilt entrance and nav aurora is switched off; content rests visible.

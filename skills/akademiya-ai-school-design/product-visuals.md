@@ -1,6 +1,6 @@
 # Product visuals (marketing site)
 
-Source: `src/marketing/` of the marketing-site worktree: `components/Visuals.tsx`, `useTilt.ts`, `styles/tilt.css`, `styles/phone3d.css`, `styles/home.css` (phone body), `phone3d/{model,scene,usePhone3d}.ts`. Contracts: `tilt.test.tsx`, `phone3d/scene.test.ts`.
+Source: `src/marketing/` of the Akademiya Frontend repo (its main/dev branch): `components/Visuals.tsx`, `useTilt.ts`, `styles/tilt.css`, `styles/phone3d.css`, `styles/home.css` (phone body), `phone3d/{model,scene,usePhone3d}.ts`. Contracts: `tilt.test.tsx`, `phone3d/scene.test.ts`.
 
 ## 1. Rules
 

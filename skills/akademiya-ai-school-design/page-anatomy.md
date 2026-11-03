@@ -74,7 +74,7 @@ Source: `src/marketing/` (pages/HomePage.tsx, components/*, styles/*). Tokens an
 ```html
 <div class="mk-velvet mk-dark mk-home-canvas">
   <span class="mk-bloom mk-bloom--red"/> <span class="mk-bloom mk-bloom--violet"/>   <!-- violet at bottom:0 -->
-  <section class="mk-familiar [is-live is-running is-ended]" data-cue-park aria-labelledby="mk-familiar-title">
+  <section class="mk-familiar [is-live is-running is-ended]" id="familiar" data-nav-theme="dark" data-cue-park aria-labelledby="mk-familiar-title">
     <div class="mk-familiar__head" data-reveal="rise"><h2 class="mk-familiar__title"/><p class="mk-familiar__sub"/></div>
     <ol class="mk-familiar__track" data-reveal="stagger" tabindex=0>
       <li class="mk-familiar__card [is-active]"><span class="mk-familiar__n">01</span><p class="mk-familiar__line"/><p class="mk-familiar__detail"/></li> × 7
