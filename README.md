@@ -1,7 +1,7 @@
 # Sigma Designs 🫧
 
 A family of [Claude Code](https://claude.com/claude-code) skills, each encoding
-a complete design language distilled from a real project (living glass: a shipped WebGL experience; the school language: the built, not yet deployed, Akademiya marketing site) and tested with
+a complete design language distilled from a real project (living glass: a shipped WebGL experience; the school language: the built, not yet deployed, Akademiya marketing site; the studio language: the live sparkleexpressllc.com build) and tested with
 skill-TDD (baseline agents miss the language; agents with the skill reproduce
 it).
 
@@ -10,6 +10,7 @@ it).
 | `sigma-designs` | The hub: routes to the right language |
 | `sigma-designs-living-glass` | Apple Intelligence / Image Playground living glass (below) |
 | `akademiya-ai-school-design` | The Akademiya AI school website: clear-sky hero, dark "Sound familiar?" pains, the "Let's fix this" turn, real 3D phones and tilting screenshots, the glass nav, pain-first and truth-first school copy in uz/ru/en |
+| `sparkle-express-design` | The Sparkle Express studio site (live at sparkleexpressllc.com): graph-paper canvas, heavy grotesk headlines with an outlined word, Kalam handwritten kickers with a yellow marker, the sketch-to-reality drag slider, one violet action on navy, honest studio copy |
 
 ## Living glass
 
@@ -73,6 +74,11 @@ page that matches the Akademiya school site") and the right skill loads.
 | `skills/akademiya-ai-school-design/product-visuals.md` | Panels, phones, tilt, the three.js phone, overlays |
 | `skills/akademiya-ai-school-design/copy-and-truth.md` | Voice, signature lines, owner decisions, never-claim lists, names, languages |
 | `skills/akademiya-ai-school-design/verification.md` | The gate, the browser matrix, pixel parity, the review loop |
+| `skills/sparkle-express-design/SKILL.md` | Principles, tokens at a glance, common mistakes |
+| `skills/sparkle-express-design/visual-system.md` | Tokens, the grid, fonts, type scale, outline headlines, kickers, buttons, cards, marquee, layout |
+| `skills/sparkle-express-design/pages-and-copy.md` | Site map, section order, content model, voice, truth rules, the brief |
+| `skills/sparkle-express-design/motion-and-interactions.md` | View transitions, reveals, ink-fill, scroll-read, marquee, tucking header; the slider, tabs, process rail, brief builder |
+| `skills/sparkle-express-design/build-and-verify.md` | The Python generator, preview, deploy, the verification checklist |
 
 ## License
 
