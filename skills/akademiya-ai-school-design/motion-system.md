@@ -1,6 +1,6 @@
 # Motion system (marketing site)
 
-Source: `src/marketing/` of the Akademiya Frontend repo (its main/dev branch). Paths below are relative to it. Contracts are pinned by `siteMotion.test.tsx`, `familiarBeats.test.tsx`, `marketingNav.test.tsx`.
+Source: `src/marketing/` of the Akademiya Frontend repo, `src/marketing`, on branch `feat/marketing-site` (PR #221) until it merges to dev. Paths below are relative to it. Contracts are pinned by `siteMotion.test.tsx`, `familiarBeats.test.tsx`, `marketingNav.test.tsx`.
 
 ## 0. Principles
 

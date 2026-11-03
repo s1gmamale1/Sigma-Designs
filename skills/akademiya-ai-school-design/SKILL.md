@@ -102,7 +102,8 @@ throwaway prototype only, and never for the product screens.
 
 ## Source of truth
 
-The live implementation is the Akademiya Frontend repo, `src/marketing/`
+The implementation is the Akademiya Frontend repo's `src/marketing/` (built on branch
+`feat/marketing-site`, PR #221; not yet deployed, akademiya.ai still serves the old site)
 (content/, components/, pages/, styles/, phone3d/, useSiteMotion.ts,
 useTilt.ts) with truth guards in `src/pages/landing/truthPatterns.ts` and the
 design contract in `DESIGN.md`. When this skill and the code disagree, the

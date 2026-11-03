@@ -10,6 +10,7 @@ SCRIPT_DIR="$(dirname "$0")"
 [ -d "$SCRIPT_DIR/skills" ] || { echo "skills/ folder not found next to this script." >&2; exit 1; }
 REPO_SKILLS="$(cd "$SCRIPT_DIR/skills" && pwd)"
 STAMP="$(date +%Y%m%d-%H%M%S)"
+SKIPPED=()
 
 # True for the pre-family skill: name: sigma-designs frontmatter + orb-recipe.md beside it.
 is_old_family_copy() {
@@ -43,6 +44,7 @@ for T in "$HOME/.claude/skills" "$HOME/.agents/skills"; do
       echo "  linked: $name"
     elif [ -e "$link" ]; then
       echo "  skip (not ours): $link" >&2
+      SKIPPED+=("$link")
     else
       ln -s "$src" "$link"
       echo "  linked: $name"
@@ -50,5 +52,12 @@ for T in "$HOME/.claude/skills" "$HOME/.agents/skills"; do
   done
 done
 
+echo
+if [ "${#SKIPPED[@]}" -eq 0 ]; then
+  echo "Skipped: nothing skipped."
+else
+  echo "Skipped (not ours, left untouched):"
+  printf '  %s\n' "${SKIPPED[@]}"
+fi
 echo
 echo "Done. Restart Claude Code / Codex to load the skills. Update later with: git pull"

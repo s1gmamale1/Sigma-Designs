@@ -193,5 +193,5 @@ AA needs 4.5:1 for normal text, 3:1 for large text (24px, or 18.66px bold).
 | `#ec031d` as text on paper | 4.45 | FAIL (large text only) |
 
 - Rule: red TEXT on light = `--mk-red-ink` (`#d0021a`); red FILL = `--mk-red`; red text on velvet = `#ff5a6e`. Small red text on light never uses `#ec031d`: it is for fills, large text and the nav's active-language pill.
-- Known sub-4.5 spot: the nav's active-language pill (red tint) is carried unchanged from the old site; do not copy the pattern elsewhere.
+- Known sub-4.5 spots: the nav's active-language pill and the dropdown's current-page link (both red tint, `--mk-nav-on-bg`) are carried unchanged from the old site; do not copy the pattern elsewhere.
 - Reduced motion: every reveal, sky drift, cloud bank, tilt entrance and nav aurora is switched off; content rests visible.

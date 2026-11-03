@@ -1,6 +1,6 @@
 ---
 name: sigma-designs-living-glass
-description: Use when building or styling anything in the Apple Intelligence / Image Playground aesthetic — living gradient orbs or soap bubbles, glowing RGB rim lights, Siri-style aurora or blooms-on-velvet backgrounds, cinematic scroll- or click-driven storytelling, scroll-snapped story beats, glassy synthesized UI sounds, in-bubble text, gradient-edge cursors — or when a WebGL story transition teleports, snaps, or dies after a navigation change — or when the user asks for that living-glass look or "like the bubble you made". Part of the sigma-designs family.
+description: Use when building or styling anything in the Apple Intelligence / Image Playground aesthetic — living gradient orbs or soap bubbles, glowing RGB rim lights, Siri-style aurora or full-dark blooms-on-velvet showpiece backgrounds, cinematic scroll- or click-driven storytelling, scroll-snapped story beats, glassy synthesized UI sounds, in-bubble text, gradient-edge cursors — or when a WebGL story transition teleports, snaps, or dies after a navigation change — or when the user asks for that living-glass look or "like the bubble you made". Part of the sigma-designs family.
 ---
 
 # Sigma Designs — Living Glass

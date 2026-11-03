@@ -1,12 +1,12 @@
 ---
 name: sigma-designs
-description: Use when the user says "Sigma Designs" or asks for one of Sigma's design languages and it is not yet clear which — the living-glass Apple Intelligence look (gradient orbs, soap bubbles, rim lights, 9-stop warm palette, glassy UI sound) or the Akademiya AI school website look (clear-sky hero, dark pains carousel, 3D phones, glass nav, pain-first school copy). This is the HUB of the sigma-designs family; route to sigma-designs-living-glass or akademiya-ai-school-design.
+description: Use when the user says "Sigma Designs" or asks for one of Sigma's design languages and it is not yet clear which — the living-glass Apple Intelligence look (gradient orbs, soap bubbles, rim lights, 9-stop warm palette, glassy UI sound) or the Akademiya AI school website look (clear-sky hero, dark pains carousel, 3D phones, glass nav, pain-first school copy). This is the hub of the sigma-designs family.
 ---
 
 # Sigma Designs (family hub)
 
-Sigma's design languages, each distilled from a shipped project into recipes
-with exact numbers. Pick the child, read its SKILL.md, and follow it; do not
+Sigma's design languages, each distilled from a real project into recipes
+with exact numbers. Living glass comes from a shipped WebGL experience; the school language comes from the built (not yet deployed) Akademiya marketing site. Pick the child, read its SKILL.md, and follow it; do not
 mix the two languages on one page.
 
 ## Route to the right child
