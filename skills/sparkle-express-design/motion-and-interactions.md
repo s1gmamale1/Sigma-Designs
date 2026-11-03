@@ -34,7 +34,7 @@ Source: `dist/motion.css` (MC), `dist/motion.js` (MJ), `dist/site.js` (SJ), `dis
 | Doodle icons | `.build-card.is-in .doodle-icon *` draw with `sk-draw 1.2s cubic-bezier(.6,.1,.3,1)`, delay `calc(.25s + var(--i) * 120ms)`; hover replays `icon-redraw 1s`. Paths carry `pathLength="1"`, `stroke-dasharray:1` | SC l.205-209 |
 | Hero headline | CSS only, no IO: each `h1>span` runs `line-up 1s cubic-bezier(.2,.8,.2,1) backwards`; 2nd span delay `.14s`; from `clip-path:inset(0 0 100% 0); translateY(.35em)` to `inset(0 0 -20% 0)`. Hero h1 is NOT split into words (outlined glyphs render cleanly per line) | MC |
 
-Observer config (MJ): `threshold:.12`, `rootMargin:'0px 0px -6% 0px'`; targets `.reveal, .split-words, .doodle, .reveal-media`; observing starts after two `requestAnimationFrame`s so above-the-fold items still animate. Needs `IntersectionObserver`, else nothing is hidden.
+Observer config (MJ): `threshold:.12`, `rootMargin:'0px 0px -6% 0px'`; targets `.reveal, .split-words, .doodle, .reveal-media`; observing starts after two `requestAnimationFrame`s so above-the-fold items still animate. Needs `IntersectionObserver`: without it, with `html.motion` set, `.reveal` blocks stay hidden until the 4s CSS failsafe (`.motion .reveal:not(.is-in)` in motion.css) shows them.
 
 ## 4. Scroll-driven pieces
 
@@ -63,7 +63,7 @@ Markup (`idea_stage()` in corporate.py): `figure.idea-stage[style=--split:52%;--
 |---|---|
 | Frame | `aspect-ratio:var(--ratio,1672/941)`, `border-radius:var(--r-media)` (28px; 18px at <=640px), `overflow:hidden`, bg `#0c0a18`, `touch-action:pan-y`, `cursor:ew-resize`, `user-select:none` |
 | Sketch layer | `position:absolute; inset:0; clip-path:inset(0 calc(100% - var(--split)) 0 0)` (sketch shows left of the split; real image underneath) |
-| Handle | 2px white line at `left:var(--split)`; 54px white circle (42px at <=640px) with two chevrons; hover `scale(1.08)` `.2s`; `:has(.stage-range:focus-visible)` gives 3px highlight outline |
+| Handle | 2px white line at `left:var(--split)`; 54px white circle (42px at <=880px) with two chevrons; hover `scale(1.08)` `.2s`; `:has(.stage-range:focus-visible)` gives 3px highlight outline |
 | Range input | `opacity:0; pointer-events:none`, full size, so it is focusable but not clickable; pointer events are handled on the frame |
 | Tags | `.tag-idea` Kalam 22px violet on `#f7f8fc`, rotated -2deg, left 18px; `.tag-reality` white 13px/700 on `#17142b99` pill with blur, right 18px; top 18px (10px mobile) |
 
@@ -96,7 +96,7 @@ Sketch SVG (`content/sketch.py`, one string `SKETCH`): `viewBox="0 0 1672 941"`,
 - Meter: `score = (name>=2 chars) + min(1, descLen/60) * 2 + (context ? 1 : 0)`, `fill = score/4` -> `--fill`; label `rough sketch` (<.35), `taking shape` (>=.35), `ready to build` (>=.75). Bar: 6px dashed track, violet fill, width transition `.5s cubic-bezier(.2,.8,.2,1)`, label Kalam 20px violet.
 - Submit: `preventDefault`; custom validity (name <2 chars, description <20 chars); on success fill read-only `#brief-output` with `PROJECT BRIEF`, title, type, stage text, description, optional context, and a footer saying it is a local draft; reveal `#brief-result`; `role=status aria-live=polite` message; focus `#brief-result-title` (`tabindex=-1`, `preventScroll`), then smooth scroll.
 - Mailto: `mailto:<studio mailbox>?subject=Project brief: <title>&body=<brief>`; built by code points; shrinks by 10% steps until the URL <= 1900 chars, appending a "[Brief shortened...]" notice; fallback is subject only. Any form `input` event resets link, hides result, clears validity.
-- Copy: `navigator.clipboard.writeText`; on failure selects the textarea and tells the user to copy by keyboard. Download: Blob `text/plain;charset=utf-8`, file `sparkle-project-brief.txt`, URL revoked after 1000ms. Every status message says "Nothing has been sent".
+- Copy: `navigator.clipboard.writeText`; on failure selects the textarea and tells the user to copy by keyboard. Download: Blob `text/plain;charset=utf-8`, file `sparkle-project-brief.txt`, URL revoked after 1000ms. The copy, fallback-select and download statuses say "Nothing has been sent"; the create status ("Your brief is ready. Email it …, copy it, or save it to your device.") does not.
 - Never submits, stores, or fetches: no `fetch`, no storage, no analytics.
 - `sparkBurst(target)`: 9 `.spark-burst` stars at the target centre, angle `2PI*i/9 + rand*.4`, distance `46 + rand*40`px, scale `.6 + rand*.7`, rotate 120deg, `650 + rand*250`ms, `cubic-bezier(.2,.8,.2,1)`; removed on finish; skipped under reduced motion.
 

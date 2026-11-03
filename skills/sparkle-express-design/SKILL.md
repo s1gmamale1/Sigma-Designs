@@ -21,7 +21,9 @@ live in the reference files; this page is the map.
    Kalam kicker in violet, tilted −1.5°, underlined by a yellow marker stroke.
 4. **One action colour.** Violet `#5a3ee6` for the primary action and links;
    navy night `#1b1640` for the dark card or panel; highlight yellow `#ffd43b`
-   only as a marker stroke or a sparkle — never a fill or a button.
+   as a marker stroke, a sparkle, kicker and link text on dark sections, the
+   text selection, the slider focus ring and the progress gradient — never a
+   fill or a button.
 5. **Show, then let them drag.** The signature piece is the sketch-to-reality
    slider: the hand-drawn SVG wireframe and the finished render on one frame,
    compared by dragging or with the keyboard.
@@ -52,16 +54,18 @@ live in the reference files; this page is the map.
 
 ```css
 /* The outlined line (site.css): paper fill under a 4px ink stroke. */
-.display-title .muted { color: var(--paper); -webkit-text-stroke: 4px var(--ink); paint-order: stroke fill; }
+.display-title .muted,.hero-idea { color: var(--paper); -webkit-text-stroke: 4px var(--ink); paint-order: stroke fill; }
 /* Each word rises out of a mask, 55ms apart; outlined words then ink in (motion.css). */
 .motion .split-words .w > span { transform: translateY(105%); transition: transform .9s cubic-bezier(.2,.8,.2,1); transition-delay: calc(var(--w,0) * 55ms); }
 .motion .split-words.is-in .w > span { transform: none; }
+/* Failsafe: headline words stay hidden if the observer never fires. */
+.motion .split-words:not(.is-in) .w > span { animation: reveal-failsafe 0s 4s forwards; }
 .display-title .muted .w > span { transition: transform .9s cubic-bezier(.2,.8,.2,1), color .9s ease;
   transition-delay: calc(var(--w,0) * 55ms), calc(.75s + var(--w,0) * 120ms); }
 .display-title.is-in .muted .w > span { color: var(--ink); }
 /* Marquee: outlined grotesk words, Kalam words in violet, yellow four-point sparks between. */
 .mq-item:not(.mq-hand) { color: var(--paper); -webkit-text-stroke: 2px var(--ink); paint-order: stroke fill; }
-.mq-spark { width: clamp(20px, 2.4vw, 34px); aspect-ratio: 1; background: var(--highlight);
+.mq-spark { flex: none; width: clamp(20px, 2.4vw, 34px); aspect-ratio: 1; background: var(--highlight);
   clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%); }
 ```
 
@@ -89,8 +93,9 @@ enough work to filter.
   products ↗) and the dark "Bring an idea" button; at ≤ 880 px it collapses
   into the menu. Add a fifth link only when the owner adds the page; otherwise
   link it from the footer or the company page.
-- New routes are generated: add the page to `build_content.py` and its copy
-  to `content/*.py`, then rebuild.
+- New routes are generated: register the page in the `data` list of
+  `build_corporate_pages()` in `content/corporate.py` with its copy (nav and
+  footer live in `build_content.py`, which runs the build), then rebuild.
 - In a throwaway single-file prototype, copy the woff2 files next to it (or
   point at `/assets/fonts/`) rather than falling back to system fonts, and if
   no real render exists, label the slider's "reality" side as a placeholder.
@@ -113,7 +118,7 @@ enough work to filter.
 | A stats strip or "trusted by" logos in the hero | No numbers or logos without real, approved work |
 | Made-up clients and case studies | Only real products (Akademiya AI); a new case study needs real, approved work |
 | A "Show shipped" button swapping two images | The drag/keyboard sketch-to-reality slider |
-| Yellow as a button or a fill | Yellow is a marker stroke or a sparkle only |
+| Yellow as a button or a fill | Yellow is never a fill or a button; it marks, sparkles, tints text on dark sections and rings focus |
 | Google Fonts or CDN links | Self-hosted woff2 from `/assets/fonts/` |
 | Editing generated HTML in `dist/` | Copy lives in `content/*.py`; rebuild with `python3 build_content.py` |
 | Photos passed off as the team or clients | Label them concept imagery; they are generated placeholders |

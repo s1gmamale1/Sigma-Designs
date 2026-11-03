@@ -1,7 +1,7 @@
 # Sigma Designs 🫧
 
 A family of [Claude Code](https://claude.com/claude-code) skills, each encoding
-a complete design language distilled from a real project (living glass: a shipped WebGL experience; the school language: the built, not yet deployed, Akademiya marketing site) and tested with
+a complete design language distilled from a real project (living glass: a shipped WebGL experience; the school language: the built, not yet deployed, Akademiya marketing site; the studio language: the live sparkleexpressllc.com build) and tested with
 skill-TDD (baseline agents miss the language; agents with the skill reproduce
 it).
 

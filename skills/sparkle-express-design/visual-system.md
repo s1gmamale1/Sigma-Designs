@@ -1,6 +1,6 @@
 # Sparkle Express visual system
 
-Source root: `sparkle-express-source/` (Tuff House). `site.css` = `dist/site.css`, `motion.css` = `dist/motion.css`. Idea: "sketch to ship". Kalam (handwritten) = the idea; Schibsted Grotesk = the reality. Outlined type = still an idea, solid type = built (site.css L1-3).
+Source root: the owner's local `sparkle-express-source/` repo. `site.css` = `dist/site.css`, `motion.css` = `dist/motion.css`. Idea: "sketch to ship". Kalam (handwritten) = the idea; Schibsted Grotesk = the reality. Outlined type = still an idea, solid type = built (site.css L1-3).
 
 ## 1. Tokens (site.css `:root`)
 

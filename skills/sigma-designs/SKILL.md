@@ -20,18 +20,22 @@ mix languages on one page.
 ### Tie-break when the brief is ambiguous
 
 Both languages can use red/violet blooms on velvet, so "blooms on velvet" alone routes nowhere.
+Rows are checked top to bottom: a brief that names Sparkle Express or the studio
+stays on the studio language even if it also mentions Akademiya AI.
 
 | Brief says | Route |
 |---|---|
+| Sparkle Express, a software studio, "from idea to reality", sketch-to-ship, graph paper or handwriting | **sparkle-express-design** |
 | Akademiya, schools, directors, or a light-first marketing page with one dark chapter | **akademiya-ai-school-design** |
 | A full dark showpiece, orbs/bubbles, the 9-stop warm palette, a WebGL atmosphere | **sigma-designs-living-glass** |
-| Sparkle Express, a software studio, "from idea to reality", sketch-to-ship, graph paper or handwriting | **sparkle-express-design** |
 | Still ambiguous | Ask one question: "the school site, the studio site, or a full dark living-glass showpiece?" |
 
 ## Shared across the family
 
-- **Proof over taste.** Every recipe was verified in a browser with measured
-  numbers; keep doing that (each child has a verification reference).
+- **Proof over taste.** Living glass and the school language were verified in a
+  browser with measured numbers; the studio language was read from its source
+  and checked against the live site files, not browser-measured. Keep verifying
+  (each child has a verification reference).
 - **Alive, never noisy.** Motion carries meaning on multi-second periods;
   reduced motion gets a calm, complete page.
 - **Real over drawn.** Real light and real product; no placeholders posing as
@@ -40,6 +44,8 @@ Both languages can use red/violet blooms on velvet, so "blooms on velvet" alone 
 Living glass is a dark, luminous showpiece language; the school language is a
 light-first marketing system that drops into velvet for one chapter; the
 studio language is a light graph-paper sketchbook where the scribble becomes
-the product. When a brief names Akademiya, schools or directors, it is the
-school language; when it names Sparkle Express or the studio, it is the
-studio language.
+the product. When a brief names Sparkle Express or the studio, it is the
+studio language, even when the page shows Akademiya AI as portfolio work
+(Akademiya AI is the studio's only portfolio item, so a Work page names both).
+The school language is only for the Akademiya site itself or pages that must
+match it.

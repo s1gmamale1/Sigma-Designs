@@ -1,6 +1,6 @@
 # Sparkle Express pages, content model, copy rules
 
-Source root: `sparkle-express-source/` (Tuff House). `corporate.py` = `content/corporate.py`; `legal.py` = `content/legal.py`.
+Source root: the owner's local `sparkle-express-source/` repo. `corporate.py` = `content/corporate.py`; `legal.py` = `content/legal.py`.
 
 ## 1. Site map (`build_content.py`, `corporate.py` `build_corporate_pages`)
 | Route | Title (nav label) | Purpose |
@@ -35,7 +35,7 @@ Common helpers (`corporate.py`): `button(text,href,kind)`, `picture(name,alt)`, 
 8. `cta()`.
 
 ### Services `/services/`
-`section.page-hero.container` (kicker "Custom software development", `h1.display-title` "Your idea.<br><span class="muted">Built together.</span>", lead, `.button-row.left` primary + text) > `figure.wide-photo.container` > `.split` prose section > `section--soft` `.service-list` of `article.service-row` (h3 + p | `ul`) > "Meet the project where it is" `.grid-3` of `a.feature-card` (kicker "I have an idea" / "I'm ready to build" / "I have a product", links `/contact/?stage=idea|scope|existing`) > `section--soft` `.split` "Clear from the start" > `.faq-layout` with `<details>` > `cta()`.
+`section.page-hero.container` (kicker "Custom software development", `h1.display-title` "Your idea.<br><span class="muted">Built together.</span>", lead, `.button-row.left` primary + text) > `figure.wide-photo.container` > `.split` prose section > `section--soft` `.service-list` of `article.service-row` (h3 + p | `ul`) > "Meet the project where it is" `.grid-3` of `article.feature-card` (kicker "I have an idea" / "I'm ready to build" / "I have a product", each with a `.text-link` to `/contact/?stage=idea|scope|existing`) > `section--soft` `.split` "Clear from the start" > `.faq-layout` with `<details>` > `cta()`.
 
 ### Approach `/approach/`
 `.page-hero` (h1 "Human creativity.<br><span class="muted">AI in motion.</span>") > `section--soft` `.process-intro` + `.process-timeline` of 5 `article.process-step.reveal` (`.process-index` 01-05, kicker = stage name, h3, p, `.step-output` with Kalam `strong` label) > `.split.align-center` (`figure.image-frame` + "Creativity gives technology direction.") > `section--soft` `.grid-3` of `.feature-card` (The people / The priorities / The constraints) > `cta('Put the first thoughts on paper', ...)`.
@@ -66,7 +66,7 @@ Common helpers (`corporate.py`): `button(text,href,kind)`, `picture(name,alt)`, 
 | CSS / JS / images | edit directly in `dist/` (`site.css`, `motion.css`, `site.js`, `motion.js`, `assets/`) | refresh |
 - Generator rewrites only `dist/*/index.html`, `404.html`, `sitemap.xml`, `robots.txt`; hand edits to those HTML files are lost on next build.
 - No npm, no third-party Python packages. Preview: `python3 -m http.server 8000 --bind 127.0.0.1 --directory dist` (needs a server: asset paths are root-absolute).
-- Page `<title>` pattern: "<Topic> — Sparkle Express"; description is one sentence.
+- Page `<title>` pattern: home is "Sparkle Express — SaaS Products & Custom Software"; services, approach, about and contact end in "— Sparkle Express"; company, terms and privacy end in "— Sparkle Express LLC"; the 404 is "Page not found — Sparkle Express". Description is one or two sentences.
 - Deploy: serve `dist/` as the domain root (static; example nginx in `README.md`).
 
 ## 5. Voice and copy rules
@@ -95,7 +95,7 @@ Common helpers (`corporate.py`): `button(text,href,kind)`, `picture(name,alt)`, 
 - Form `#brief-form`, `fieldset.brief-fields` starts `disabled`; JS enables it after handlers are installed. `<noscript>` shows a `.legal-summary` note.
 - Fields: working project name (required, max 100), "What are you building?" select (Custom software, SaaS product, Education platform, Mobile experience, Workflow or integration, Something else), "Where are you today?" select, idea textarea (min 20, max 4000, rows 5), optional context (max 2000, rows 3). Ink meter label "rough sketch" fills as the form completes.
 - Submit "Create my brief" builds a text draft shown in `textarea.brief-output` (ruled-paper look: 32px line grid), result block `#brief-result` with focus moved to its heading.
-- Three outputs: (1) `a#email-brief` "Email this brief" = `mailto:<studio mailbox>?subject=...&body=...`, whole URL kept under 1900 characters by trimming the body on code points; falls back to subject-only then bare mailto; (2) `#copy-brief` copies via `navigator.clipboard.writeText`, status "Copied to clipboard. Nothing has been sent."; (3) `#download-brief` "Save as text" downloads a Blob as `sparkle-project-brief.txt` (`text/plain;charset=utf-8`).
+- Three outputs: (1) `a#email-brief` "Email this brief" = `mailto:<studio mailbox>?subject=...&body=...`, whole URL kept under 1900 characters by trimming the body on code points; if building the URL throws, the fallback is subject-only (the bare `mailto:` is just the reset state on any form input); (2) `#copy-brief` copies via `navigator.clipboard.writeText`, status "Copied to clipboard. Nothing has been sent."; (3) `#download-brief` "Save as text" downloads a Blob as `sparkle-project-brief.txt` (`text/plain;charset=utf-8`).
 - Status text lives in `p#brief-status[role=status][aria-live=polite]`.
 - Notes in source: the button label names a team member; the studio mailbox appears in the footer, contact card, and mailto. When reusing elsewhere, say "the studio mailbox" and take the address from `EMAIL` in `corporate.py`.
 - `?stage=` query on `/contact/` links preselects the stage (services starting-point cards).
