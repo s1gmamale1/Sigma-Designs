@@ -19,7 +19,7 @@ mix languages on one page.
 
 ### Tie-break when the brief is ambiguous
 
-Both languages can use red/violet blooms on velvet, so "blooms on velvet" alone routes nowhere.
+Living glass and the school language both use red/violet blooms on velvet, so "blooms on velvet" alone routes nowhere.
 Rows are checked top to bottom: a brief that names Sparkle Express or the studio
 stays on the studio language even if it also mentions Akademiya AI.
 

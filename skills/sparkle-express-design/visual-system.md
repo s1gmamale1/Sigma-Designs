@@ -141,7 +141,7 @@ Star clip-path (reuse everywhere): `polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 1
 | 1100px | `.build-grid` 2 cols; `.hero-head` 1 col; `.grid-3` 2 cols; footer links 2 cols; `.photo-story` 1 col (image max-h 520px) |
 | 880px | container/header width `100% - 48px`; hamburger shown (`.nav-toggle` 44px), nav becomes dropdown under the 70px bar; split/two-paths/faq/contact/company/service-row/legal go 1 col; `.wf-panel` 1 col; stage handle shrinks |
 | 640px | container `100% - 32px`; body 17px; `.grid-2/.grid-3/.build-grid/.values-grid/.field-grid` 1 col; footer links 2 cols gap 24; process rail padding-left `64px`, index 40px; `.wide-photo img` aspect `4/3` |
-Reduced motion: all animation/transition durations `.01ms`; `html.motion` class is only added when motion is allowed. Print hides header, footer, brief panel.
+Reduced motion: all animation/transition durations `.01ms`; `html.motion` class is only added when motion is allowed. Print hides header, footer, nav toggle, brief panel, slider handle and range.
 
 ## 13. Focus + selection
 - `:focus-visible{outline:3px solid var(--violet);outline-offset:4px;border-radius:4px}`; `.skip-link` fixed, dark, drops to `top:12px` on focus.
