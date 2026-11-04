@@ -55,11 +55,15 @@ live in the reference files; this page is the map.
 ```css
 /* The outlined line (site.css): paper fill under a 4px ink stroke. */
 .display-title .muted,.hero-idea { color: var(--paper); -webkit-text-stroke: 4px var(--ink); paint-order: stroke fill; }
+/* Word spans must be inline-block or translateY does nothing (motion.css). */
+.w > span { display: inline-block; }
 /* Each word rises out of a mask, 55ms apart; outlined words then ink in (motion.css). */
 .motion .split-words .w > span { transform: translateY(105%); transition: transform .9s cubic-bezier(.2,.8,.2,1); transition-delay: calc(var(--w,0) * 55ms); }
 .motion .split-words.is-in .w > span { transform: none; }
-/* Failsafe: headline words stay hidden if the observer never fires. */
+/* Failsafe: show the headline words after 4s if the observer never fires. */
 .motion .split-words:not(.is-in) .w > span { animation: reveal-failsafe 0s 4s forwards; }
+/* The failsafe keyframes: snap to visible (motion.css). */
+@keyframes reveal-failsafe { to { opacity: 1; transform: none; } }
 .display-title .muted .w > span { transition: transform .9s cubic-bezier(.2,.8,.2,1), color .9s ease;
   transition-delay: calc(var(--w,0) * 55ms), calc(.75s + var(--w,0) * 120ms); }
 .display-title.is-in .muted .w > span { color: var(--ink); }
