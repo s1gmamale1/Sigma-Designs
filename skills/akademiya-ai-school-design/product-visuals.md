@@ -1,6 +1,6 @@
 # Product visuals (marketing site)
 
-Source: `src/marketing/` of the Akademiya Frontend repo (on dev and prod since #221/#222): `components/Visuals.tsx`, `useTilt.ts`, `styles/tilt.css`, `styles/phone3d.css`, `styles/home.css` (phone body), `phone3d/{model,scene,usePhone3d}.ts`. Contracts: `tilt.test.tsx`, `phone3d/scene.test.ts`.
+Source: `src/marketing/` of the Akademiya Frontend repo (on dev and prod since #221/#222). §6 lives in `components/FamiliarBeats.tsx`, `styles/familiar.css`, `publicAssets.test.ts` and `tests/e2e-marketing/familiar-art.spec.ts`. The rest: `components/Visuals.tsx`, `useTilt.ts`, `styles/tilt.css`, `styles/phone3d.css`, `styles/home.css` (phone body), `phone3d/{model,scene,usePhone3d}.ts`. Contracts: `tilt.test.tsx`, `phone3d/scene.test.ts`.
 
 ## 1. Rules
 
@@ -156,19 +156,19 @@ Swaps the CSS phone for WebGL per figure; the CSS phone stays in the layout (it 
 
 ## 6. Pain plates ("Sound familiar?" cards)
 
-Each carousel card carries a path-traced still from the sales deck's 3D studio. That's an evening desk (warm-black table and room, one warm lamp key, a faint cool rim) with the brand objects: red spiral notebooks, a yellow pencil and star, a paper speech bubble, the red-roofed schoolhouse. One scene per pain `key`. Each scene sits in the right half of a 16:9 frame, and the left half is dark negative space for the text.
+Each carousel card carries a path-traced still from the sales deck's 3D studio. That's an evening desk (warm-black table and room, one lamp key, warm except a cold key on `quarter`, and a faint cool rim) with the brand objects: red spiral notebooks, a yellow pencil and star, a paper speech bubble, the red-roofed schoolhouse. One scene per pain `key`. Each scene sits in the right half of a 16:9 frame, and the left half is dark negative space for the text.
 
 | key | Scene | Deck scene (`marketing/deck/3d/plates.mjs`) |
 |---|---|---|
-| opinion | a lone speech bubble | `p4` (camera x −0.02 so the bubble sits right) |
+| opinion | a lone speech bubble | `p4`, rendered with the camera 0.02 left of the deck framing (position `[0.057, 0.16, 0.33]`, target `[0.057, 0.03, -0.012]`) so the bubble sits further right |
 | scattered | every object scattered apart | `scattered` |
 | checking | a notebook stack with a pencil | `p3` |
-| scratch | the schoolhouse alone at dusk | `p1` |
-| stuck | an open notebook, a cut red end | `stuck` |
+| scratch | the schoolhouse alone at dusk, a short loose red end at the door | `p1` |
+| stuck | an open notebook with the pencil on its page, a cut red end | `stuck` |
 | parents | a lone star | `p2` |
 | quarter | a closed red notebook | `quarter` |
 
-- **Making them:** the deck's Higgsfield path tracer (headless Chrome WebGPU on 127.0.0.1 only), 1920×1080 at 256 spp (about 15 s each on an M4), made 8-bit before use. Then `cwebp` at 1600×900 (q86) and 800×450 (q84), into `public/landing/img/familiar/<key>-<w>.webp`, about 180 KB for all 14. No text, people or product UI in a plate; `alt=""` (decorative, the line carries the meaning). List the files in `publicAssets.test.ts`. The `ART` map is typed `Record<HomePain['key'], …>`, so a new key needs its plate.
+- **Making them:** the deck's Higgsfield path tracer (headless Chrome WebGPU on 127.0.0.1 only), 1920×1080 at 256 spp (about 15 s each on an M4), made 8-bit before use. Then `cwebp` at 1600×900 (q86) and 800×450 (q84), into `public/landing/img/familiar/<key>-<w>.webp`, about 155 KB (155,950 B) for all 14. No text, people or product UI in a plate; `alt=""` (decorative, the line carries the meaning). List the files in `publicAssets.test.ts`. The `ART` map is typed `Record<HomePain['key'], …>`, so a new key needs its plate.
 - **Desktop:** the plate is fit by **width** (`width:100%; height:auto`), anchored right and bottom, over a `#000` base, with a 6% top mask so it has no seam.
   - Never use `object-fit: cover` here. The cards share the tallest card's height, so cover scales the plate and slides the scene under the text.
   - Card `min-height` is at least the plate's height (a container-query calc). Put the plain `clamp(19rem, 50svh, 29rem)` first as the fallback.
