@@ -1,6 +1,6 @@
 # Product visuals (marketing site)
 
-Source: `src/marketing/` of the Akademiya Frontend repo, `src/marketing`, on branch `feat/marketing-site` (PR #221) until it merges to dev: `components/Visuals.tsx`, `useTilt.ts`, `styles/tilt.css`, `styles/phone3d.css`, `styles/home.css` (phone body), `phone3d/{model,scene,usePhone3d}.ts`. Contracts: `tilt.test.tsx`, `phone3d/scene.test.ts`.
+Source: `src/marketing/` of the Akademiya Frontend repo (on dev and prod since #221/#222): `components/Visuals.tsx`, `useTilt.ts`, `styles/tilt.css`, `styles/phone3d.css`, `styles/home.css` (phone body), `phone3d/{model,scene,usePhone3d}.ts`. Contracts: `tilt.test.tsx`, `phone3d/scene.test.ts`.
 
 ## 1. Rules
 
@@ -153,3 +153,30 @@ Swaps the CSS phone for WebGL per figure; the CSS phone stays in the layout (it 
 | Mirrored tilt | CSS rotateX vs three y-up | X rotation negated in `poseMatrix` |
 | Lost context left a blank phone | no fallback | `webglcontextlost` => `discard()` => CSS phone |
 | Texture memory | 4x screen texture on 3x phones | cap at capture native width and GPU limit |
+
+## 6. Pain plates ("Sound familiar?" cards)
+
+Each carousel card carries a path-traced still from the sales deck's 3D studio. That's an evening desk (warm-black table and room, one warm lamp key, a faint cool rim) with the brand objects: red spiral notebooks, a yellow pencil and star, a paper speech bubble, the red-roofed schoolhouse. One scene per pain `key`. Each scene sits in the right half of a 16:9 frame, and the left half is dark negative space for the text.
+
+| key | Scene | Deck scene (`marketing/deck/3d/plates.mjs`) |
+|---|---|---|
+| opinion | a lone speech bubble | `p4` (camera x −0.02 so the bubble sits right) |
+| scattered | every object scattered apart | `scattered` |
+| checking | a notebook stack with a pencil | `p3` |
+| scratch | the schoolhouse alone at dusk | `p1` |
+| stuck | an open notebook, a cut red end | `stuck` |
+| parents | a lone star | `p2` |
+| quarter | a closed red notebook | `quarter` |
+
+- **Making them:** the deck's Higgsfield path tracer (headless Chrome WebGPU on 127.0.0.1 only), 1920×1080 at 256 spp (about 15 s each on an M4), made 8-bit before use. Then `cwebp` at 1600×900 (q86) and 800×450 (q84), into `public/landing/img/familiar/<key>-<w>.webp`, about 180 KB for all 14. No text, people or product UI in a plate; `alt=""` (decorative, the line carries the meaning). List the files in `publicAssets.test.ts`. The `ART` map is typed `Record<HomePain['key'], …>`, so a new key needs its plate.
+- **Desktop:** the plate is fit by **width** (`width:100%; height:auto`), anchored right and bottom, over a `#000` base, with a 6% top mask so it has no seam.
+  - Never use `object-fit: cover` here. The cards share the tallest card's height, so cover scales the plate and slides the scene under the text.
+  - Card `min-height` is at least the plate's height (a container-query calc). Put the plain `clamp(19rem, 50svh, 29rem)` first as the fallback.
+  - Line measure `min(20ch, 52%)`; scrim `rgba(18,13,20)` .92 → .78 at 35% → .62 at 58% → 0 at 72%, plus a bottom fade.
+- **Mobile (≤720px):** a full-bleed 4:3 band above the text (`object-position: right center`), fading into the card. `sizes="(max-width: 720px) calc((100vw - 3rem) * 1.34), 50rem"`.
+- **Loading:** lazy in the static HTML; once the gallery is first on screen, all seven switch to eager. Lazy images inside a horizontal scroller only load as each card slides in, so they would pop in mid-slide.
+- **Long Uzbek words:** `overflow-wrap: break-word`, and a soft hyphen at the morpheme boundary where a word is wider than the measure ('O‘qituvchi\u00ADlaringiz').
+- **Proof before merge:**
+  - glyph-masked contrast on every card × uz/ru/en × 1440 and 1024, giving line ≥ 3:1 and detail ≥ 4.5:1 (measured 18.2 / 8.4);
+  - glyph-to-object clearance > 0;
+  - `tests/e2e-marketing/familiar-art.spec.ts` checks decode, width-fit geometry, the mobile band, and each line's right edge ≤ 53% of the card.

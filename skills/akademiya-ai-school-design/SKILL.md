@@ -39,7 +39,7 @@ same brand. Exact values live in the reference files; this page is the map.
 | # | Section | Surface | Job |
 |---|---|---|---|
 | 1 | Sky hero: `akademiya.ai` + product line + one red line | sky over paper | Name and what it is, in one second |
-| 2 | "Sound familiar?" — 7 hooks, timer carousel | velvet + blooms | The director recognises the week |
+| 2 | "Sound familiar?" — 7 hooks, timer carousel, each card a path-traced deck plate | velvet + blooms | The director recognises the week |
 | 3 | Turn: "Let's fix this." + "Introducing Akademiya AI for Schools!" | velvet → paper | Lights on |
 | 4 | Cures: pain recalled → Built answer → real capture | paper + sky wash | Proof by product |
 | 5 | People: teachers, students, parents | paper | Who else wins |
@@ -92,7 +92,7 @@ throwaway prototype only, and never for the product screens.
 |---|---|
 | Warm cream + serif + one indigo accent ("premium SaaS") | Red/ink/velvet/paper tokens, Poppins/Montserrat |
 | Opening with a feature list before the name and the pains | Name + one owner-approved product line, then the pains |
-| Pains as a grid of icon cards | One hook per beat, carousel on a timer, on velvet |
+| Pains as a grid of icon cards | One hook per beat, carousel on a timer, on velvet, each card with its 3D plate (product-visuals.md §6) |
 | Stat counters, "[PILOT DATA]" placeholders, animated bar charts | No numbers without proof; show the real screen |
 | Screenshots in browser chrome or drawn with CSS | Real capture in a tilted panel or a 3D phone |
 | Scroll-jacked carousel or pinned scroll beats | Timer carousel; the page scroll never drives it |
